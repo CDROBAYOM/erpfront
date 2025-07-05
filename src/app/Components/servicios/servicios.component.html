@@ -3,7 +3,7 @@
   <div class="hero-content">
     <h1 class="hero-title">Más que simples consultorías, ofrecemos un acompañamiento estratégico en TI</h1>
     <p class="hero-subtitle">En InnovateCode, transformamos empresas como la tuya a través de soluciones tecnológicas a medida. Impulsa tu crecimiento, reduce costos y alcanza nuevos niveles de eficiencia con la ayuda de nuestros expertos.</p>
-    <button class="hero-btn">Contáctenos</button>
+    <button class="hero-btn" (click)="mostrarFormularioContacto()">Contáctenos</button>
   </div>
 </section>
 
@@ -104,6 +104,9 @@
   <div class="container">
     <h2 class="cta-title">Superemos retos juntos</h2>
     <h3 class="cta-subtitle">InnovateCode Solutions</h3>
-    <button class="cta-btn">Contáctanos</button>
+    <button class="cta-btn" (click)="mostrarFormularioContacto()">Contáctanos</button>
   </div>
 </section>
+
+<!-- Componente de Contacto -->
+<app-contacto #contactoComponent></app-contacto>

@@ -1,68 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ContactoComponent } from '../contacto/contacto.component';
+import { DiagnosticoComponent } from '../diagnostico/diagnostico.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: [], // Usará solo los estilos globales
   standalone: true,
-  imports: [RouterModule, FormsModule, CommonModule]
+  imports: [RouterModule, FormsModule, CommonModule, ContactoComponent, DiagnosticoComponent]
 })
 export class HomeComponent {
-  formularioVisible = false;
-  
-  formulario = {
-    // Información general
-    nombreEmpresa: '',
-    nombreContacto: '',
-    cargoContacto: '',
-    correoContacto: '',
-    numEmpleados: '',
-    sector: '',
-    
-    // Procesos
-    procesos: {
-      facturacion: false,
-      conciliacion: false,
-      inventario: false,
-      reportes: false,
-      crm: false,
-      notificaciones: false,
-      otros: false,
-      otrosTexto: ''
-    },
-    nivelAutomatizacion: '',
-    frecuencia: '',
-    problemas: '',
-    
-    // Interés y oportunidades
-    mejoras: {
-      ahorrarTiempo: false,
-      reducirErrores: false,
-      trazabilidad: false,
-      disminuirCostos: false,
-      liberarTiempo: false
-    },
-    interes: '',
-    contacto: ''
-  };
+  @ViewChild('contactoComponent') contactoComponent!: ContactoComponent;
+  @ViewChild('diagnosticoComponent') diagnosticoComponent!: DiagnosticoComponent;
 
-  mostrarFormulario() {
-    this.formularioVisible = true;
-    document.body.style.overflow = 'hidden';
+  // Método para mostrar el formulario de contacto
+  mostrarFormularioContacto() {
+    if (this.contactoComponent) {
+      this.contactoComponent.mostrarFormulario();
+    }
   }
 
-  cerrarFormulario() {
-    this.formularioVisible = false;
-    document.body.style.overflow = 'auto';
-  }
-
-  enviarFormulario() {
-    console.log('Formulario enviado:', this.formulario);
-    // Aquí puedes agregar la lógica para enviar el formulario
-    alert('¡Gracias por tu interés! Te contactaremos pronto.');
-    this.cerrarFormulario();
+  // Método para mostrar el formulario de diagnóstico
+  mostrarFormularioDiagnostico() {
+    if (this.diagnosticoComponent) {
+      this.diagnosticoComponent.mostrarFormulario();
+    }
   }
 } 

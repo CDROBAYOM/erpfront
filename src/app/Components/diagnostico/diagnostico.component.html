@@ -1,0 +1,196 @@
+<!-- Formulario Modal -->
+<div class="modal-overlay" *ngIf="formularioVisible" (click)="cerrarFormulario()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2 class="modal-title">📋 Formulario de diagnóstico para automatización de procesos</h2>
+      <p class="modal-subtitle">Objetivo: Detectar procesos repetitivos, ineficiencias y nivel de madurez digital en la empresa.</p>
+      <button class="modal-close" (click)="cerrarFormulario()">×</button>
+    </div>
+    
+    <form class="diagnostico-form" (ngSubmit)="enviarFormulario()" #diagnosticoForm="ngForm">
+      
+      <!-- Sección 1: Información general -->
+      <div class="form-section">
+        <h3 class="form-section-title">🧑‍💼 Información general de la empresa</h3>
+        
+        <div class="form-group">
+          <label for="nombreEmpresa">Nombre de la empresa:</label>
+          <input type="text" id="nombreEmpresa" name="nombreEmpresa" [(ngModel)]="formulario.nombreEmpresa" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="nombreContacto">Nombre del contacto:</label>
+          <input type="text" id="nombreContacto" name="nombreContacto" [(ngModel)]="formulario.nombreContacto" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="cargoContacto">Cargo del contacto:</label>
+          <input type="text" id="cargoContacto" name="cargoContacto" [(ngModel)]="formulario.cargoContacto" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="correoContacto">Correo electrónico / WhatsApp:</label>
+          <input type="text" id="correoContacto" name="correoContacto" [(ngModel)]="formulario.correoContacto" required>
+        </div>
+        
+        <div class="form-group">
+          <label>Número aproximado de empleados:</label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="numEmpleados" value="1-10" [(ngModel)]="formulario.numEmpleados" required>
+              <span>1–10</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="numEmpleados" value="11-50" [(ngModel)]="formulario.numEmpleados">
+              <span>11–50</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="numEmpleados" value="51-200" [(ngModel)]="formulario.numEmpleados">
+              <span>51–200</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="numEmpleados" value="200+" [(ngModel)]="formulario.numEmpleados">
+              <span>Más de 200</span>
+            </label>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Sector al que pertenece tu empresa:</label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="sector" value="logistica" [(ngModel)]="formulario.sector" required>
+              <span>Logística / Transporte</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="sector" value="contabilidad" [(ngModel)]="formulario.sector">
+              <span>Contabilidad / Servicios financieros</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="sector" value="manufactura" [(ngModel)]="formulario.sector">
+              <span>Manufactura / Producción</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="sector" value="comercio" [(ngModel)]="formulario.sector">
+              <span>Comercio / Retail</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="sector" value="servicios" [(ngModel)]="formulario.sector">
+              <span>Servicios generales / Otros</span>
+            </label>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Sección 2: Procesos internos -->
+      <div class="form-section">
+        <h3 class="form-section-title">🔁 Procesos internos actuales</h3>
+        
+        <div class="form-group">
+          <label>¿Qué tipo de procesos se realizan con frecuencia en tu empresa? (Puedes marcar más de una opción)</label>
+          <div class="checkbox-group">
+            <label class="checkbox-option">
+              <input type="checkbox" name="procesos" value="facturacion" [(ngModel)]="formulario.procesos.facturacion">
+              <span>Facturación y cobros</span>
+            </label>
+            <label class="checkbox-option">
+              <input type="checkbox" name="procesos" value="conciliacion" [(ngModel)]="formulario.procesos.conciliacion">
+              <span>Conciliación de pagos o bancos</span>
+            </label>
+            <label class="checkbox-option">
+              <input type="checkbox" name="procesos" value="inventario" [(ngModel)]="formulario.procesos.inventario">
+              <span>Gestión de pedidos o inventario</span>
+            </label>
+            <label class="checkbox-option">
+              <input type="checkbox" name="procesos" value="reportes" [(ngModel)]="formulario.procesos.reportes">
+              <span>Reportes o informes manuales</span>
+            </label>
+            <label class="checkbox-option">
+              <input type="checkbox" name="procesos" value="crm" [(ngModel)]="formulario.procesos.crm">
+              <span>Seguimiento de clientes (CRM)</span>
+            </label>
+            <label class="checkbox-option">
+              <input type="checkbox" name="procesos" value="notificaciones" [(ngModel)]="formulario.procesos.notificaciones">
+              <span>Envío de correos o notificaciones</span>
+            </label>
+            <label class="checkbox-option">
+              <input type="checkbox" name="procesos" value="otros" [(ngModel)]="formulario.procesos.otros">
+              <span>Otros: <input type="text" placeholder="Especificar" [(ngModel)]="formulario.procesos.otrosTexto"></span>
+            </label>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>¿Cómo se realizan actualmente esos procesos?</label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="nivelAutomatizacion" value="manual" [(ngModel)]="formulario.nivelAutomatizacion" required>
+              <span>Todo es manual (Excel, papel, correo electrónico)</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="nivelAutomatizacion" value="parcial" [(ngModel)]="formulario.nivelAutomatizacion">
+              <span>Parcialmente automatizado (uso de macros o apps)</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="nivelAutomatizacion" value="total" [(ngModel)]="formulario.nivelAutomatizacion">
+              <span>Totalmente automatizado</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="nivelAutomatizacion" value="ns" [(ngModel)]="formulario.nivelAutomatizacion">
+              <span>No estoy seguro</span>
+            </label>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>¿Con qué frecuencia se repiten estos procesos?</label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="frecuencia" value="diario" [(ngModel)]="formulario.frecuencia" required>
+              <span>A diario</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="frecuencia" value="varias" [(ngModel)]="formulario.frecuencia">
+              <span>Varias veces a la semana</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="frecuencia" value="semanal" [(ngModel)]="formulario.frecuencia">
+              <span>Semanalmente</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="frecuencia" value="mensual" [(ngModel)]="formulario.frecuencia">
+              <span>Mensualmente</span>
+            </label>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>¿Qué tan problemáticos o lentos sientes estos procesos?</label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="problemas" value="muy-lentos" [(ngModel)]="formulario.problemas" required>
+              <span>Muy lentos o propensos a errores</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="problemas" value="manejables" [(ngModel)]="formulario.problemas">
+              <span>Toman tiempo pero son manejables</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="problemas" value="sin-problemas" [(ngModel)]="formulario.problemas">
+              <span>No causan mayores problemas</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="problemas" value="no-evaluado" [(ngModel)]="formulario.problemas">
+              <span>No lo he evaluado</span>
+            </label>
+          </div>
+        </div>
+      </div>    
+      
+      <div class="form-actions">
+        <button type="button" class="btn-secondary" (click)="cerrarFormulario()">Cancelar</button>
+        <button type="submit" class="btn-primary">Enviar diagnóstico</button>
+      </div>
+    </form>
+  </div>
+</div>
