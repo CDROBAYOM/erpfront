@@ -276,6 +276,42 @@ main {
   height: auto;
 }
 
+.hero-grid {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 40px;
+  min-height: 420px;
+}
+
+.hero-image-wrapper {
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+}
+
+.hero-img {
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.hero-img-size {
+  width: 200%;
+  max-width: 980px;   /* Puedes ajustar este valor */
+  max-height: 720px;  /* Puedes ajustar este valor */
+  min-width: 180px;   /* Opcional: tamaño mínimo */
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
 /* Responsive Design - Actualizado */
 @media (max-width: 900px) {
   .navbar {
