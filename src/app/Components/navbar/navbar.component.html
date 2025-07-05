@@ -1,0 +1,18 @@
+<nav class="navbar">
+  <div class="navbar__logo">
+    <!-- <img src="/assets/logo.png" class="navbar__logo-img" /> -->
+    <a routerLink="/" class="navbar__brand">InnovateCode</a>
+  </div>
+  <div class="navbar__hamburger" (click)="menuOpen = !menuOpen">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#007272" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+  </div>
+  <ul class="navbar__links" [class.open]="menuOpen">
+    <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>
+    <li><a routerLink="/servicios" routerLinkActive="active">Servicios</a></li>
+    <!-- <li><a href="#">Clientes</a></li> -->
+    <li><a href="#">Contáctenos</a></li>
+  </ul>
+  <div class="navbar__actions">    
+    <button class="navbar__cta">Contáctenos</button>
+  </div>
+</nav> 
