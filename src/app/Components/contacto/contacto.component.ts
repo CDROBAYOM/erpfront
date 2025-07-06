@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-contacto',
@@ -10,10 +11,12 @@ import { CommonModule } from '@angular/common';
   styleUrl: './contacto.component.css'
 })
 export class ContactoComponent {
+  constructor(private http: HttpClient) {}
+
   formulario = {
     nombre: '',
     empresa: '',
-    correo: '',
+    email: '',
     mensaje: ''
   };
 
@@ -30,10 +33,21 @@ export class ContactoComponent {
 
   enviarFormulario() {
     if (this.validarFormulario()) {
-      console.log('Formulario enviado:', this.formulario);
-      // Aquí puedes agregar la lógica para enviar el formulario
-      alert('¡Gracias por contactarnos! Te responderemos pronto.');
-      this.cerrarFormulario();
+        const url = 'https://ae87wjne5a.execute-api.us-east-1.amazonaws.com/prod/clientes'; // URL de invocación del API Gateway
+        const headers = { 'Content-Type': 'application/json' };
+        
+        console.log(this.formulario);
+
+        this.http.post(url, this.formulario, { headers }).subscribe({      
+          next: (response) => {
+            alert('¡Gracias por contactarnos! Te responderemos pronto.');
+            this.cerrarFormulario();
+          },
+          error: (error) => {
+            alert('Hubo un error al enviar el formulario. Intenta de nuevo.');
+            console.error(error);
+          }
+        });
     } else {
       alert('Por favor, completa todos los campos obligatorios.');
     }
@@ -42,7 +56,7 @@ export class ContactoComponent {
   validarFormulario(): boolean {
     return this.formulario.nombre.trim() !== '' &&
            this.formulario.empresa.trim() !== '' &&
-           this.formulario.correo.trim() !== '' &&
+           this.formulario.email.trim() !== '' &&
            this.formulario.mensaje.trim() !== '';
   }
 
@@ -50,7 +64,7 @@ export class ContactoComponent {
     this.formulario = {
       nombre: '',
       empresa: '',
-      correo: '',
+      email: '',
       mensaje: ''
     };
   }
